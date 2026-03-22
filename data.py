@@ -16,25 +16,25 @@ faq_data = [
 order_test_data = [
     # Набор 1: верхняя кнопка + данные
     (ORDER_BUTTON_TOP, {
-        "name": "Иван",
+        "name": "Петр",
         "surname": "Петров",
-        "address": "ул. Ленина, д. 1",
-        "metro": "Сокольники",
-        "phone": "+79161234567",
+        "address": "ул. Кронштадский бульвар, д. 7",
+        "metro_station": "Водный стадион",
+        "phone": "+79151234567",
         "date_offset": 1,
         "rental_period": "сутки",
-        "color": "black",
+        "scooter_color": "чёрный жемчуг",
         "comment": "Позвонить за час"
     }),
     (ORDER_BUTTON_BOTTOM, {
         "name": "Анна",
-        "surname": "Иванова",
-        "address": "пр. Мира, д. 5",
-        "metro": "ВДНХ",
-        "phone": "+79039876543",
+        "surname": "Петрова",
+        "address": "пр. Мира, д. 20",
+        "metro_station": "ВДНХ",
+        "phone": "+79031234567",
         "date_offset": 2,
         "rental_period": "двое суток",
-        "color": "grey",
+        "scooter_color": "серая безысходность",
         "comment": ""
     })
 ]

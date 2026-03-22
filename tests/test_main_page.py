@@ -5,7 +5,7 @@ from pages.main_page import MainPage
 from conftest import BASE_URL
 
 
-@allure.feature('FAQ')
+@allure.feature('Проверка FAQ')
 class TestMainPage:
 
     @pytest.mark.parametrize('index, expected_text', faq_data)

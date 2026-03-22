@@ -3,9 +3,6 @@ from selenium.webdriver.common.by import By
 # Окно с принятием куки
 ACCEPT_COOKIES = (By.ID, "rcc-confirm-button")
 
-# Логотипы
-SCOOTER_LOGO = (By.XPATH, "//a[contains(@class, 'Header_LogoScooter')]")
-YANDEX_LOGO = (By.XPATH, "//a[contains(@class, 'Header_LogoYandex')]")
 
 # Кнопка Заказать
 ORDER_BUTTON_TOP = (By.XPATH, "//div[contains(@class, 'Header_Nav')]/button[text()='Заказать']")
