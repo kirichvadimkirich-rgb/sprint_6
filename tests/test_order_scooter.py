@@ -8,7 +8,7 @@ from pages.order_confirmation_modal_page import OrderConfirmationModalPage
 from pages.order_success_modal_page import OrderSuccessModalPage
 from url import BASE_URL, LINK_YANDEX_REDIRECT 
 from pages.base_page import BasePage
-import time
+
 
 @allure.feature('Создания заказа')
 class TestOrderScooter:

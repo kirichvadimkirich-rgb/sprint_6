@@ -3,6 +3,7 @@ from locators import order_confirmation_modal_page_locators as loc
 import allure
 from pages.base_page import BasePage
 
+
 class OrderConfirmationModalPage(BasePage):
 
     def __init__(self, driver):
