@@ -1,38 +1,37 @@
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+
 from locators import order_customer_info_page_locators as loc
 import allure
+from pages.base_page import BasePage
 
-
-class OrderCustomerInfoPage:
+class OrderCustomerInfoPage(BasePage):
 
     def __init__(self, driver):
-        self.driver = driver
+        super().__init__(driver)
    
     @allure.step("Заполнить поле 'Имя' {name}")
     def set_name(self, name):
-        WebDriverWait(self.driver, 3).until(EC.visibility_of_element_located(loc.NAME_FIELD)).send_keys(name)
+        self._send_keys(loc.NAME_FIELD, name)
 
     @allure.step("Заполнить поле 'Фамилия'{surname}")
     def set_surname(self, surname):
-        WebDriverWait(self.driver, 3).until(EC.visibility_of_element_located(loc.SURNAME_FIELD)).send_keys(surname)
+        self._send_keys(loc.SURNAME_FIELD, surname)
 
     @allure.step("Заполнить поле 'Адрес'{address}")
     def set_address(self, address):
-        WebDriverWait(self.driver, 3).until(EC.visibility_of_element_located(loc.ADDRESS_FIELD)).send_keys(address)
+        self._send_keys(loc.ADDRESS_FIELD, address)
 
     @allure.step('Выбрать станцию метро {metro_station}')
     def set_metro(self, metro_station):
-        WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located(loc.METRO_FIELD)).send_keys(metro_station)
-        WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable(loc.METRO_DROPDOWN_LIST)).click()
+        self._send_keys(loc.METRO_FIELD, metro_station)
+        self._click(loc.METRO_DROPDOWN_LIST)
         
     @allure.step("Заполнить поле 'Телефон' {phone}")
     def set_phone(self, phone):
-        WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located(loc.PHONE_FIELD)).send_keys(phone)
+        self._send_keys(loc.PHONE_FIELD, phone)
 
     @allure.step('Нажать кнопку "Далее"')
     def click_button_next(self):
-        WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable(loc.NEXT_BUTTON)).click()
+        self._click(loc.NEXT_BUTTON)
        
     @allure.step("Заполнить все поля")
     def fill_out_customer_info(self, name, surname, address, metro_station, phone):

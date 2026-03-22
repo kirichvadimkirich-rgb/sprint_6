@@ -23,4 +23,4 @@ def browser(driver):
     except (NoSuchElementException, ElementClickInterceptedException):
         # Если кнопка не найдена или не кликабельна — просто игнорируем
         pass   
-
+    yield driver

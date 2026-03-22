@@ -6,9 +6,9 @@ from pages.order_customer_info_page import OrderCustomerInfoPage
 from pages.order_rental_details_page import OrderRentalDetailsPage
 from pages.order_confirmation_modal_page import OrderConfirmationModalPage
 from pages.order_success_modal_page import OrderSuccessModalPage
+from url import BASE_URL, LINK_YANDEX_REDIRECT 
 from pages.base_page import BasePage
-from conftest import BASE_URL, LINK_YANDEX_REDIRECT 
-
+import time
 
 @allure.feature('Создания заказа')
 class TestOrderScooter:
@@ -31,13 +31,12 @@ class TestOrderScooter:
         order_confirmation_modal_page = OrderConfirmationModalPage(browser)
         order_confirmation_modal_page.click_button_yes()
         order_success_modal_page = OrderSuccessModalPage(browser)
-        assert 'Заказ оформлен' in order_success_modal_page.get_title_text()
+        assert 'Заказ оформлен' in order_success_modal_page.get_title_text(), "текст 'Заказ оформлен' отсутсвует"
         order_success_modal_page.click_button_status()
-        base_page = BasePage(browser)
-        BasePage.wait_for_page_to_load(browser)
-        base_page.click_yandex_logo()
-        original = BasePage.switch_to_new_tab(browser, expected_url= LINK_YANDEX_REDIRECT)
-        assert base_page.get_current_url(browser) == LINK_YANDEX_REDIRECT 
-        BasePage.close_and_switch_back(browser, original)
-        base_page.click_scooter_logo()
-        assert base_page.get_current_url(browser) == BASE_URL
+        BasePage._wait_for_page_to_load(browser)
+        main_page.click_yandex_logo()
+        original = BasePage._switch_to_new_tab(browser, expected_url= LINK_YANDEX_REDIRECT)
+        assert main_page._get_current_url_with_wait() == LINK_YANDEX_REDIRECT, f'url { main_page._get_current_url_with_wait()} не соответствует ожидаемому {LINK_YANDEX_REDIRECT}'
+        BasePage._close_and_switch_back(browser, original)
+        main_page.click_scooter_logo()
+        assert main_page._get_current_url_with_wait() == BASE_URL, f'url {main_page._get_current_url_with_wait()} не соответствует ожидаемому {BASE_URL}'

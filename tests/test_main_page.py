@@ -2,7 +2,7 @@ import pytest
 from data import faq_data
 import allure
 from pages.main_page import MainPage
-from conftest import BASE_URL
+from url import BASE_URL
 
 
 @allure.feature('Проверка FAQ')
