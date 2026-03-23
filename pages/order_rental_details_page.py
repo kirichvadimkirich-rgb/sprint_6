@@ -18,18 +18,18 @@ class OrderRentalDetailsPage(BasePage):
         delivery_date= f"{delivery_day}.{date.today().month}.{date.today().year}"
         self._click(loc.DELIVERY_DATE_FIELD)
         self._send_keys(loc.DELIVERY_DATE_FIELD, delivery_date)
-        locator = BasePage._format_locator(loc.DELIVERY_DATE_CALENDAR, date_offset)
+        locator = self._format_locator(loc.DELIVERY_DATE_CALENDAR, date_offset)
         self._click(locator)
 
     @allure.step("Выбрать срок аренды, поле 'Срок аренды'{rental_period}")
     def set_rental_period(self, rental_period):
         self._click(loc.RENTAL_PERIOD_FIELD)
-        locator = BasePage._format_locator(loc.RENTAL_PERIOD, rental_period)
+        locator = self._format_locator(loc.RENTAL_PERIOD, rental_period)
         self._click(locator)
 
     @allure.step("Выбрать цвет самоката, поле 'Цвет самоката'{scooter_color}")
     def set_scooter_color(self, scooter_color):
-        locator = BasePage._format_locator(loc.SCOOTER_COLOR, scooter_color)
+        locator = self._format_locator(loc.SCOOTER_COLOR, scooter_color)
         self._click(locator)
         
     @allure.step("Заполнить поле 'Комментарий для курьера' {comment}")

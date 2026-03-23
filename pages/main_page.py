@@ -11,12 +11,12 @@ class MainPage(BasePage):
 
     @allure.step('Клик по вопросу с индексом {index}')
     def click_question(self, index):
-        locator = BasePage._format_locator(loc.QUESTION_PREFIX, index)
+        locator = self._format_locator(loc.QUESTION_PREFIX, index)
         self._click_with_scroll(locator)
 
     @allure.step('Получение текста ответа для вопроса с индексом {index}')
     def get_answer_text(self, index):
-        locator = BasePage._format_locator(loc.ANSWER_PREFIX, index)
+        locator = self._format_locator(loc.ANSWER_PREFIX, index)
         return self._get_text(locator)
        
     @allure.step('Нажать на кнопку заказа (верхнюю или нижнюю)')
