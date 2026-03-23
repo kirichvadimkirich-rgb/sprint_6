@@ -61,19 +61,18 @@ class BasePage:
         by, value = locator
         return (by, value.format(text))
     
-    @staticmethod
     @allure.step("Перейти на другую вкладку")
-    def _switch_to_new_tab(driver, expected_url=None, timeout=5):
-        original_tab = driver.current_window_handle
+    def _switch_to_new_tab(self, expected_url=None, timeout=5):
+        original_tab = self.driver.current_window_handle
         try:
-            WebDriverWait(driver, timeout).until(lambda d: len(d.window_handles) > 1)
-            new_tab = [tab for tab in driver.window_handles if tab != original_tab][0]
-            driver.switch_to.window(new_tab)
+            WebDriverWait(self.driver, timeout).until(lambda d: len(d.window_handles) > 1)
+            new_tab = [tab for tab in self.driver.window_handles if tab != original_tab][0]
+            self.driver.switch_to.window(new_tab)
             if expected_url:
-                 WebDriverWait(driver, timeout).until(EC.url_to_be(expected_url))
+                 WebDriverWait(self.driver, timeout).until(EC.url_to_be(expected_url))
             else:
             # Дождаться, чтобы URL перестал быть about:blank
-                WebDriverWait(driver, timeout).until(lambda d: d.current_url != "about:blank")
+                WebDriverWait(self.driver, timeout).until(lambda d: d.current_url != "about:blank")
             return original_tab
         except TimeoutException:
             logging.error("Не удалось обнаружить новую вкладку за %s секунд", timeout)
@@ -82,13 +81,11 @@ class BasePage:
             logging.exception("Ошибка при переключении на новую вкладку: %s", e)
             return None
 
-    @staticmethod
     @allure.step("Закрыть вкладку и вернуться на предыдущую вкладку")
-    def _close_and_switch_back(driver, original_tab):
-        driver.close()
-        driver.switch_to.window(original_tab)
+    def _close_and_switch_back(self, original_tab):
+        self.driver.close()
+        self.driver.switch_to.window(original_tab)
 
-    @staticmethod
     @allure.step("Ожидаем полной загрузки страницы")
-    def _wait_for_page_to_load(driver):
-        WebDriverWait(driver, 5).until(lambda d: d.execute_script("return document.readyState") == "complete")  
+    def _wait_for_page_to_load(self, timeout=5):
+        WebDriverWait(self.driver, timeout).until(lambda d: d.execute_script("return document.readyState") == "complete")  
